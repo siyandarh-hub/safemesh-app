@@ -1,0 +1,28 @@
+{
+  "name": "safemesh",
+  "version": "2.4.1",
+  "description": "SafeMesh \u2014 privacy-first community safety for South Africa (full stack)",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:https": "node index.js --https",
+    "dev": "node --watch index.js",
+    "vendor": "node vendor.js",
+    "backup": "node backup.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.5.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.16",
+    "selfsigned": "^2.4.1",
+    "uuid": "^11.0.3"
+  }
+}

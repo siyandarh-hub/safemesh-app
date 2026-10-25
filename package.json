@@ -1,0 +1,21 @@
+{
+  "name": "safemesh-root",
+  "version": "2.4.1",
+  "private": true,
+  "description": "Convenience scripts so you can run SafeMesh from the project root",
+  "scripts": {
+    "setup": "npm --prefix backend install && node tools/setup.js",
+    "start": "npm --prefix backend start",
+    "dev": "npm --prefix backend run dev",
+    "vendor": "npm --prefix backend run vendor",
+    "backup": "node backend/backup.js",
+    "build:css": "tailwindcss -c tools/tailwind.config.js -i tools/tailwind.input.css -o frontend/tailwind.css --minify",
+    "start:https": "npm --prefix backend run start:https"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.1"
+  }
+}

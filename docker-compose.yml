@@ -1,0 +1,10 @@
+services:
+  safemesh:
+    build: .
+    ports:
+      - "3847:3847"
+    env_file:
+      - .env          # copy .env.example to .env first
+    volumes:
+      - ./data:/app/data   # accounts, incidents, logs and uploads survive restarts
+    restart: unless-stopped

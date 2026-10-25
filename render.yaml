@@ -1,0 +1,22 @@
+# One-click deploy on Render: New + > Blueprint > pick this repo.
+# NOTE: the free plan has no persistent disk, so data resets on restart/redeploy.
+# For lasting data use plan: starter and uncomment the disk block.
+services:
+  - type: web
+    name: safemesh
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "true"
+      - key: SAFEMESH_ADMIN_KEY
+        generateValue: true
+      - key: SAFEMESH_JWT_SECRET
+        generateValue: true
+    # disk:
+    #   name: safemesh-data
+    #   mountPath: /app/data
+    #   sizeGB: 1

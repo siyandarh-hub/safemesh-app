@@ -1,0 +1,30 @@
+# SafeMesh behind Caddy, which obtains and renews a free HTTPS certificate automatically.
+#   1. Point your domain's DNS A record at this server, open ports 80 and 443.
+#   2. In .env set DOMAIN=... and ACME_EMAIL=..., plus SAFEMESH_ADMIN_KEY and SAFEMESH_JWT_SECRET.
+#   3. docker compose -f docker-compose.https.yml up -d
+services:
+  safemesh:
+    build: .
+    env_file: [.env]
+    environment:
+      TRUST_PROXY: "true"      # believe Caddy's X-Forwarded-Proto
+      FORCE_HTTPS: "true"
+    expose: ["3847"]           # not published to the internet; only Caddy can reach it
+    volumes:
+      - ./data:/app/data       # database + uploads: back this up (see docs/DEPLOYMENT.md)
+    restart: unless-stopped
+  caddy:
+    image: caddy:2
+    depends_on: [safemesh]
+    ports: ["80:80", "443:443"]
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in .env}
+      ACME_EMAIL: ${ACME_EMAIL:?set ACME_EMAIL in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+volumes:
+  caddy_data:
+  caddy_config:
