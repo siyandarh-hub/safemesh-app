@@ -5,9 +5,9 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "start:https": "node index.js --https",
-    "dev": "node --watch index.js",
+    "start": "node boot.js",
+    "start:https": "node boot.js --https",
+    "dev": "node --watch boot.js",
     "vendor": "node vendor.js",
     "backup": "node backup.js"
   },
@@ -22,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.16",
+    "pg": "^8.13.1",
     "selfsigned": "^2.4.1",
     "uuid": "^11.0.3"
   }

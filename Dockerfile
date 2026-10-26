@@ -8,4 +8,4 @@ COPY frontend ./frontend
 # Leaflet is shipped in frontend/vendor and Tailwind is pre-built (frontend/tailwind.css); nothing is downloaded at build time
 RUN mkdir -p data
 EXPOSE 3847
-CMD ["node", "backend/index.js"]
+CMD ["node", "backend/boot.js"]

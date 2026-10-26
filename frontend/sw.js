@@ -1,5 +1,5 @@
 /* SafeMesh service worker — offline shell only; API always network */
-const CACHE = 'safemesh-shell-v2.4.0';
+const CACHE = 'safemesh-shell-v2.4.1';
 const SHELL = ['/', '/index.html', '/app.js', '/app.css', '/tailwind.css', '/vendor/leaflet.js', '/vendor/leaflet.css', '/vendor/leaflet-heat.js', '/manifest.json', '/offline.html'];
 
 self.addEventListener('install', (event) => {
@@ -18,6 +18,8 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
+  // Never touch cross-origin requests (e.g. OpenStreetMap tiles): let the page load them directly
+  if (url.origin !== self.location.origin) return;
   // Never cache API or uploads
   if (url.pathname.startsWith('/api')) return;
   if (event.request.method !== 'GET') return;

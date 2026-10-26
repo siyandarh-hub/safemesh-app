@@ -16,6 +16,8 @@ services:
         generateValue: true
       - key: SAFEMESH_JWT_SECRET
         generateValue: true
+      - key: DATABASE_URL        # Supabase Session pooler connection string (set in the Render dashboard)
+        sync: false
     # disk:
     #   name: safemesh-data
     #   mountPath: /app/data
